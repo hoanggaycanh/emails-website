@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Sign In</title>
+    <style>
+    body {
+    font-family: Arial, sans-serif; /* Use a clean, readable font */
+    background-color: #f4f4f4; /* Light background color */
+    margin: 0; /* Remove default margin */
+    padding: 0; /* Remove default padding */
+    display: flex; /* Use flexbox for centering */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    height: 100vh; /* Full height of the viewport */
+}
+    </style>
+</head>
+<body>
+    <div class = "container-sign">
+    <h1>Sign In Here</h1>
+   <form action="/signin" method="post">
+    <label class="uname" for="username"> Username: </label>
+    <input class ="unameInput" type="text" id = "username" name = "username" require></br>
+    <label class = "pword" for="password">Password:</label>
+    <input class = "pwordInput" type="password" id="password" name="password" require></br>
+    <div style="height: 50px;">
+        <% if (error){ %>
+            <p style="color: red"><%=error%></p>
+        <% } %>
+    </div>
+    <button class="sign" type = "submit"> Sign In</button></form>
+    <div class="link" style="margin-top: 10px; text-align: center;">
+    <a class = "sign-a" href="/signup">If you don't have an account, Sign up Here!</a>
+    </div>
+    </div>
+   
+</body>
+</html>

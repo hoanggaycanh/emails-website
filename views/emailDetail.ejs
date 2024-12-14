@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Detail</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <%- include('header.ejs') %>
+    <div class="container">
+        <%- include('sidebar.ejs') %> <!-- Include the sidebar here -->
+        <main>
+            <section>
+                <h3 style="margin: 6px 20px">Email Detail</h3>
+                <div class="content">
+                    <div class="email-details">
+                        <div class="email-header">
+                            <h3 style="text-align: center"><%= emailDetails.subject %></h3>
+                            <div style="display: flex; gap: 400px; justify-content: space-between; align-items: center;">
+                            <p style="width: 300px; padding: 10px">From: <%= emailDetails.sender_name %><span style="margin-left: 60px;">To: <%= emailDetails.receiver_name %></span></p>
+                            <span style ="text-align: center; padding: 10px">Sent: <%= new Date(emailDetails.sent_at).toLocaleString() %></span>
+                            </div>
+                        </div>
+                        <div class="email-body">
+                            <div style ="margin-bottom: 20px; height: 110px;"><%= emailDetails.body %></div>
+                            
+                            <% if (emailDetails.attachment) { %>
+                                <div>File name: <%=emailDetails.attachment%></div>
+                                <a href="/api/download/<%= emailDetails.attachment %>"><button  class="download-button">Download File</button></a>
+                            <% } else { %>
+                                <div>No file uploaded</div>
+                            <% } %>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+</body>
+</html>

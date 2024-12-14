@@ -1,0 +1,18 @@
+
+<div class="pagination">
+    <% if (recentPage > 1) { %>
+    <a href="/inbox?recentPage=<%= recentPage - 1 %>&pageSize=5">&laquo;</a>
+    <% }  %>
+
+    <% for (let i = 1; i <= totalPages; i++) { %>
+    <% if (i === recentPage) { %>
+    <span class="active"><%= i %></span>
+    <% } else { %>
+    <a href="/inbox?recentPage=<%= i %>&pageSize=5"><%= i %></a>
+    <% } %>
+    <% } %>
+
+    <% if (recentPage < totalPages) { %>
+    <a href="/inbox?recentPage=<%= recentPage + 1 %>&pageSize=5">&raquo;</a>
+    <% }  %> 
+  </div>

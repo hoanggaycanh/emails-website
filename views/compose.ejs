@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compose Email</title>
+    <link rel="stylesheet" href="/styles.css">
+    <script>
+    function validateForm() {
+        const recipient = document.getElementById('recipient').value;
+
+
+        if (!recipient) {
+        alert('Please select a recipient.');
+        return false;
+        }  
+    return true; // If all validations pass
+    }
+    </script>
+</head>
+<body>
+    <%- include('header.ejs') %>
+    <div class="container">
+        <%- include('sidebar.ejs') %> <!-- Include the sidebar here -->
+        <main>
+            <section>
+                <h3 style="margin-left: 20px;">Compose Email</h3>
+                <div class="email-details">
+                    <form action="/compose" method="POST" enctype="multipart/form-data" onsubmit="return validateForm();">
+                        <div class="header-list">
+                        <div>
+                            <label for="recipient">Recipient:</label>
+                            <select id="recipient" name="recipient" required>
+                                <option value="">Select a recipient</option>
+                                <% users.forEach(user => { %>
+                                    <option value="<%= user.id %>"><%= user.fullName %> (<%= user.email %>)</option>
+                                <% }); %>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="subject">Subject:</label>
+                            <input type="text" id="subject" name="subject" placeholder="No subject" />
+                        </div>
+                    </div>
+                        <div style=" display:flex; flex-direction: column; margin-top: 20px;">
+                            <label for="body">Body:</label>
+                            <textarea id="body" name="body" rows="10" l></textarea>
+                        </div>
+                        <div style="margin: 10px 0;">
+                            <label for="file">Attach a file:</label>
+                            <input type="file" id="file" name="file" /> <!-- This should match the Multer setup -->
+                        </div>
+                        <button class="send-button" type="submit">Send</button>
+                    </form>
+                    <% if (message) { %>
+                        <div  style ="font-size:20px; color:green; font-weight: 700; text-align: center;"><%= message.text %></div>
+                    <% } %>
+                </div>
+            </section>
+        </main>
+    </div>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+        font-family: Arial, sans-serif; /* Use a clean, readable font */
+        background-color: #f4f4f4; /* Light background color */
+        margin: 0; /* Remove default margin */
+        padding: 0; /* Remove default padding */
+        display: flex; /* Use flexbox for centering */
+        justify-content: center; /* Center horizontally */
+        height: 100vh; /* Full height of the viewport */
+        }
+        .error { color: red; }
+        .success { color: green; }
+        
+    </style>
+</head>
+<body>
+<% if (success) { %>
+
+    <div style="margin-top: 50px; text-align: center;"><div class="success"><%= success %></div>
+    <div class="link">
+        <a href="/signin">Go to sign in</a>
+    </div></div>
+    
+<% } %>
+<% if (!success) { %>
+    <div class="container-signup">
+        <h1>Create a New Account</h1>
+        <% if (error) { %>
+            <div class="error"><%= error %></div>
+        <% } %>
+    <form action="/signup" method="POST">
+        <label class = "uname" style = "margin: 0px;" for="fullName">Full Name:</label><br>
+        <input class = "signinInput" type="text" id="fullName" name="fullName" required><br><br>
+
+        <label class = "uname" style = "margin: 0px;" for="email">Email Address:</label><br>
+        <input  class = "signinInput" type="email" id="email" name="email" required><br><br>
+
+        <label class = "uname" style = "margin: 0px;" for="password">Password:</label><br>
+        <input class = "signinInput" type="password" id="password" name="password" required><br><br>
+
+        <label  class = "uname" style = "margin: 0px;" for="confirmPassword">Confirm Password:</label><br>
+        <input  class = "signinInput" type="password" id="confirmPassword" name="confirmPassword" required><br><br>
+
+        <input class = "sign" type="submit" value="Sign Up">
+    </form>
+</div>
+<% } %>
+</body>
+</html>

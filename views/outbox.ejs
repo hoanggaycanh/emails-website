@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Outbox</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <%- include('header.ejs') %>
+    <div class="container">
+        <%- include('sidebar.ejs') %> <!-- Include the sidebar here -->
+        <main>
+            <section>
+                <div class="header-list">
+                    <h3 style=" margin-left: 20px;" ><%= fullName %> 's Outbox</h2>
+                    <button class="delete-button" onclick="deleteEmails('/api/delete-ob_emails', '.email-checkbox')">Delete Selected</button>
+                </div>
+                <div class="email-details">
+                    <table id="customers"> 
+                        <thead>
+                            <tr class="title">
+                              <th>Select</th>
+                              <th>Receiver</th>
+                              <th>Subject</th>
+                              <th>Sent At</th>
+                            </tr>
+                          </thead>               
+                        <tbody>
+                            <% receivedEmails.forEach(email => { %>
+                                <tr>
+                                    <td>
+                                        <input type="checkbox" class="email-checkbox" data-id="<%= email.id %>">
+                                    </td>
+                                    <td><%= email.receiver_name %></td>
+                                    <td onclick="window.location.href='/emailDetail?id=<%= email.id %>'" style="cursor: pointer;">
+                                        <a href="/emailDetail?id=<%= email.id %>">
+                                            <%= (!email.subject || email.subject.trim().length === 0) ? '[No subject]' : email.subject %>
+                                        </a>
+                                    </td>
+                                    <td><%= new Date(email.sent_at).toLocaleString() %></td>
+                                </tr>
+                            <% }); %>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>     
+    </div>
+    <%- include('pagination_ob.ejs') %>
+          <script src="/js/deleteMail.js" >
+          document.querySelector('.delete-button').addEventListener('click', () => {
+            deleteEmails('/api/delete-ob_emails', '.email-checkbox');
+        });          
+        </script>
+</body>
+</html>
